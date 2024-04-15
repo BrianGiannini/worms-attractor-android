@@ -33,19 +33,21 @@ private val sandWormViewModel: SandWormViewModel by inject(SandWormViewModel::cl
 @Composable
 fun SandWormScreen() {
     var isOpened by remember {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
 
     BoxWithConstraints(
-        Modifier
-            .fillMaxHeight()
+        Modifier.fillMaxHeight()
     ) {
-        val maxHeight = maxHeight
-        val tubeHeight = maxHeight * 0.3f
+        val maxHeightSize = maxHeight
+        val maxWidthSize = maxWidth
+        val tubeHeight = maxHeightSize * 0.2f
 
         Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.BottomEnd,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 10.dp),
+            contentAlignment = Alignment.BottomCenter,
         ) {
 
             Column {
@@ -55,16 +57,10 @@ fun SandWormScreen() {
 
                 Spacer(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(maxHeight * 0.1f)
-                        .background(color = Color.White),
-                )
-
-                Spacer(
-                    modifier = Modifier
+                        .width(maxWidthSize * 0.8f)
                         .clip(RoundedCornerShape(15.dp))
-                        .fillMaxWidth()
-                        .height(maxHeight * 0.3f)
+                        .align(Alignment.CenterHorizontally)
+                        .height(maxHeightSize * 0.3f)
                         .background(color = Color.Black),
                 )
 
@@ -72,15 +68,42 @@ fun SandWormScreen() {
                     modifier = Modifier
                         .background(color = Color.Black)
                         .height(variableHeightTube)
-                        .width(maxHeight * 0.15f)
+                        .width(maxWidthSize * 0.3f)
                         .align(Alignment.CenterHorizontally),
                 )
 
                 Spacer(
                     modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .clip(RoundedCornerShape(10.dp))
+                        .width(maxWidthSize * 0.90f)
+                        .height(maxHeightSize * 0.075f)
+                        .background(color = Color.Black),
+                )
+
+                Spacer(
+                    modifier = Modifier
                         .clip(RoundedCornerShape(15.dp))
-                        .fillMaxWidth()
-                        .height(maxHeight * 0.2f)
+                        .width(maxWidthSize * 0.8f)
+                        .height(maxHeightSize * 0.20f)
+                        .align(Alignment.CenterHorizontally)
+                        .background(color = Color.Black),
+                )
+
+                Spacer(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(15.dp))
+                        .width(maxWidthSize * 0.5f)
+                        .height(maxHeightSize * 0.10f)
+                        .align(Alignment.CenterHorizontally)
+                        .background(color = Color.Black),
+                )
+
+                Spacer(
+                    modifier = Modifier
+                        .width(maxWidthSize * 0.25f)
+                        .height(maxHeightSize * 0.1f)
+                        .align(Alignment.CenterHorizontally)
                         .background(color = Color.Black),
                 )
             }
