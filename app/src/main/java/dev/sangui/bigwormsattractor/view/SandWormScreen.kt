@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,9 +33,8 @@ private val sandWormViewModel: SandWormViewModel by inject(SandWormViewModel::cl
 
 @Composable
 fun SandWormScreen() {
-    var isOpened by remember {
-        mutableStateOf(false)
-    }
+    val isToggling = sandWormViewModel.toggleJob?.isActive == true
+    val toggleState by sandWormViewModel.toggleState.collectAsState()
 
     BoxWithConstraints(
         Modifier.fillMaxHeight()
@@ -52,7 +52,7 @@ fun SandWormScreen() {
 
             Column {
                 val variableHeightTube by animateDpAsState(
-                    targetValue = if (isOpened) tubeHeight else 0.0.dp,
+                    targetValue = if (toggleState) tubeHeight else 0.0.dp,
                 )
 
                 Spacer(
@@ -114,11 +114,16 @@ fun SandWormScreen() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
+        Text("Current Toggle State: ${if (toggleState) "ON" else "OFF"}")
+
         Button(
             modifier = Modifier.align(Alignment.BottomEnd),
             onClick = {
-                sandWormViewModel.triggerVibration()
-                isOpened = !isOpened
+                if (isToggling) {
+                    sandWormViewModel.stopPeriodicVibrator()
+                } else {
+                    sandWormViewModel.startPeriodicVibrator()
+                }
             },
         ) {
             Text(text = "Activated")
