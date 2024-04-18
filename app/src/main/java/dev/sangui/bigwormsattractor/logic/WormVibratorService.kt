@@ -4,34 +4,42 @@ import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import androidx.core.content.ContextCompat.getSystemService
-
-// Vibrate with a pattern
 
 interface WormVibratorService {
-    fun vibratePhone()
+    fun triggerVibrator()
+    fun stopVibrator()
 }
 
 class WormVibratorServiceImpl(private val context: Context): WormVibratorService {
 
-    override fun vibratePhone() {
-        val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val vibratorManager = getSystemService(context, android.os.VibratorManager::class.java)
+    private var vibrator: Vibrator? = null
+
+    override fun triggerVibrator() {
+
+        vibrator =  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as? android.os.VibratorManager
             vibratorManager?.defaultVibrator
         } else {
-            getSystemService(context, Vibrator::class.java)
+            context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
         }
 
-        if (vibrator?.hasVibrator() == true) { // Check if the device has a vibrator
+        val pattern = longArrayOf(200, 700, 600)
+        val amplitude = intArrayOf(0, 255,0 )
+        val repeat = -1  // Triggering once
+
+        if (vibrator?.hasVibrator() == true) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                // New method for API Level 26 (Android 8.0 Oreo) and above
-                val effect = VibrationEffect.createWaveform(longArrayOf(0, 100, 1000, 300), 1)
-                vibrator.vibrate(effect)
+                val effect = VibrationEffect.createWaveform(pattern, amplitude, repeat)
+                vibrator?.vibrate(effect)
             } else {
-                // Deprecated method for below API Level 26
                 @Suppress("DEPRECATION")
-                vibrator.vibrate(500)
+                vibrator?.vibrate(pattern, repeat)
             }
         }
+    }
+
+    override fun stopVibrator() {
+        vibrator?.cancel()
+        vibrator = null
     }
 }

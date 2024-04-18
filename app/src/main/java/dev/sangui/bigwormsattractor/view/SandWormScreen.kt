@@ -1,6 +1,5 @@
 package dev.sangui.bigwormsattractor.view
 
-import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -117,11 +116,9 @@ fun SandWormScreen() {
             modifier = Modifier.align(Alignment.BottomEnd),
             onClick = {
                 if (isToggling) {
-                    Log.d("debug", "stop vibrator")
-                    sandWormViewModel.stopPeriodicVibrator()
+                    sandWormViewModel.stopPeriodicThumperAnimation()
                 } else {
-                    Log.d("debug", "start vibrator")
-                    sandWormViewModel.startPeriodicVibrator()
+                    sandWormViewModel.startPeriodicThumperAnimation()
                 }
             },
         ) {
