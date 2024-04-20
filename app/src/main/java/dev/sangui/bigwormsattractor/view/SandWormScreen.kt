@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -39,7 +40,7 @@ fun SandWormScreen() {
     ) {
         val maxHeightSize = maxHeight
         val maxWidthSize = maxWidth
-        val tubeHeight = maxHeightSize * 0.2f
+        val tubeHeight = maxHeightSize * 0.15f
 
         Box(
             modifier = Modifier
@@ -55,10 +56,13 @@ fun SandWormScreen() {
 
                 Spacer(
                     modifier = Modifier
-                        .width(maxWidthSize * 0.8f)
-                        .clip(RoundedCornerShape(15.dp))
+                        .padding(bottom = 0.2.dp)
+                        .clip(
+                            RoundedCornerShape(topStart = 100.dp, topEnd = 100.dp)
+                        )
                         .align(Alignment.CenterHorizontally)
-                        .height(maxHeightSize * 0.3f)
+                        .height(maxHeightSize * 0.40f)
+                        .width(maxWidthSize * 0.8f)
                         .background(color = Color.Black),
                 )
 
@@ -66,7 +70,7 @@ fun SandWormScreen() {
                     modifier = Modifier
                         .background(color = Color.Black)
                         .height(variableHeightTube)
-                        .width(maxWidthSize * 0.3f)
+                        .width(maxWidthSize * 0.25f)
                         .align(Alignment.CenterHorizontally),
                 )
 
@@ -81,7 +85,9 @@ fun SandWormScreen() {
 
                 Spacer(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(15.dp))
+                        .clip(
+                            CutCornerShape(bottomStart = 90.dp, bottomEnd = 90.dp)
+                        )
                         .width(maxWidthSize * 0.8f)
                         .height(maxHeightSize * 0.20f)
                         .align(Alignment.CenterHorizontally)
@@ -90,8 +96,12 @@ fun SandWormScreen() {
 
                 Spacer(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(15.dp))
-                        .width(maxWidthSize * 0.5f)
+                        .clip(
+                            CutCornerShape(
+                                bottomStart = 15.dp, bottomEnd = 15.dp
+                            )
+                        )
+                        .width(maxWidthSize * 0.35f)
                         .height(maxHeightSize * 0.10f)
                         .align(Alignment.CenterHorizontally)
                         .background(color = Color.Black),
@@ -99,8 +109,8 @@ fun SandWormScreen() {
 
                 Spacer(
                     modifier = Modifier
-                        .width(maxWidthSize * 0.25f)
-                        .height(maxHeightSize * 0.1f)
+                        .width(maxWidthSize * 0.20f)
+                        .height(maxHeightSize * 0.05f)
                         .align(Alignment.CenterHorizontally)
                         .background(color = Color.Black),
                 )
