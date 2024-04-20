@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,6 +32,7 @@ private val sandWormViewModel: SandWormViewModel by inject(SandWormViewModel::cl
 fun SandWormScreen() {
     val isToggling by sandWormViewModel.isToggling.collectAsState()
     val toggleState by sandWormViewModel.toggleState.collectAsState()
+    val buttonText = if (isToggling) "Deactivate" else "Activate"
 
     BoxWithConstraints(
         Modifier.fillMaxHeight()
@@ -111,7 +113,12 @@ fun SandWormScreen() {
         modifier = Modifier.fillMaxSize()
     ) {
         Button(
-            modifier = Modifier.align(Alignment.BottomEnd),
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 5.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.DarkGray
+            ),
             onClick = {
                 if (isToggling) {
                     sandWormViewModel.stopPeriodicThumperAnimation()
@@ -120,7 +127,7 @@ fun SandWormScreen() {
                 }
             },
         ) {
-            Text(text = "Activated")
+            Text(text = buttonText)
         }
     }
 
