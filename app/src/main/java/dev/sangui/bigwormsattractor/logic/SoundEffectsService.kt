@@ -15,10 +15,10 @@ interface SoundEffectsService {
 class SoundEffectsImpl(private val context: Context) : SoundEffectsService {
 
     private val soundPool = SoundPool.Builder()
-        .setMaxStreams(4)
+        .setMaxStreams(2)
         .build()
 
-    private val soundList = listOf(R.raw.loud_noise)
+    private val soundList = listOf(R.raw.loud_noise, R.raw.recall)
     private val listLoadedSounds: MutableList<Int> = mutableListOf()
 
     override fun getSound(index: Int)  =  listLoadedSounds[index]

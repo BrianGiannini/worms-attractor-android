@@ -1,7 +1,5 @@
 package dev.sangui.bigwormsattractor.view
 
-import android.media.SoundPool
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import dev.sangui.bigwormsattractor.logic.WormVibratorService
 import androidx.lifecycle.viewModelScope
@@ -17,6 +15,10 @@ class SandWormViewModel(
     private val soundEffectsService: SoundEffectsService
 ) : ViewModel() {
 
+    init {
+        soundEffectsService.initPool()
+    }
+
     private val _toggleState = MutableStateFlow(false)
     val toggleState = _toggleState.asStateFlow()
 
@@ -25,8 +27,6 @@ class SandWormViewModel(
     val isToggling = _isToggling.asStateFlow()
 
     fun startPeriodicThumperAnimation() {
-
-        soundEffectsService.initPool()
 
         // Prevent starting a new toggle if one is already active
         if (_isToggling.value) return
@@ -39,6 +39,8 @@ class SandWormViewModel(
                     if (_toggleState.value) {
                         wormVibrationService.triggerVibrator()
                         soundEffectsService.playSound(noiseId = soundEffectsService.getSound(0))
+                    } else {
+                        soundEffectsService.playSound(noiseId = soundEffectsService.getSound(1))
                     }
                     _toggleState.value = !_toggleState.value
                     delay(800)  // Delay for 800ms second
