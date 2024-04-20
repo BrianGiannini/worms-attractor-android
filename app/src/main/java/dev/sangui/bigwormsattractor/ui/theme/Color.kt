@@ -1,11 +1,24 @@
 package dev.sangui.bigwormsattractor.ui.theme
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+@Immutable
+data class WormsColors(
+    val background: Color,
+)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+fun wormsLightColors(
+    background: Color = Color(0xFF, 0xF9, 0xC8),
+): WormsColors = WormsColors(
+    background = background,
+)
+
+fun wormsDarkColors(
+    background: Color = Color(255, 204, 0),
+): WormsColors = WormsColors(
+    background = background,
+)
+
+val LocalColors = staticCompositionLocalOf { wormsDarkColors() }

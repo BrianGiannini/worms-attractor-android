@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import dev.sangui.bigwormsattractor.ui.theme.BigWormsAttractorTheme
+import dev.sangui.bigwormsattractor.ui.theme.WormsTheme
+import dev.sangui.bigwormsattractor.ui.theme.WormsTheme.BigWormsAttractorTheme
 import dev.sangui.bigwormsattractor.view.SandWormScreen
 
 class MainActivity : ComponentActivity() {
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
             BigWormsAttractorTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = WormsTheme.colors.background,
                 ) {
                     SandWormScreen()
                 }

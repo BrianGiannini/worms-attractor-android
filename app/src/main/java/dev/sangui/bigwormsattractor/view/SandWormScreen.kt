@@ -110,8 +110,6 @@ fun SandWormScreen() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Text("Current Toggle State: ${if (toggleState) "ON" else "OFF"}")
-
         Button(
             modifier = Modifier.align(Alignment.BottomEnd),
             onClick = {
