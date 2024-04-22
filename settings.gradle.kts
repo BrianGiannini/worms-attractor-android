@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Big Worms Attractor"
+rootProject.name = "Sand Worms Attractor"
 include(":app")
